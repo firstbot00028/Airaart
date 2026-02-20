@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AIRA | Launching Soon</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <style>
+        :root {
+            --accent: #4facfe;
+            --gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 50%, #da33ff 100%);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body { 
+            background: #000; 
+            color: #fff; 
+            font-family: 'Inter', sans-serif; 
+            overflow-x: hidden; 
+        }
+
+        /* Navbar */
+        nav {
+            position: fixed; top: 0; width: 100%; padding: 20px 40px;
+            display: flex; justify-content: space-between; align-items: center;
+            background: rgba(0,0,0,0.8); backdrop-filter: blur(20px); z-index: 1000;
+            border-bottom: 0.5px solid rgba(255,255,255,0.1);
+        }
+        .logo { 
+            display: flex; align-items: center; gap: 12px; 
+            font-weight: 800; font-size: 1.4rem; letter-spacing: 2px; 
+        }
+        
+        /* Hero Section */
+        .hero {
+            height: 100vh; display: flex; flex-direction: column;
+            justify-content: center; align-items: center; text-align: center;
+            position: relative; padding: 20px;
+        }
+        #star-canvas { 
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; 
+        }
+        
+        .hero h1 { 
+            font-size: clamp(3rem, 8vw, 5.5rem); font-weight: 800; 
+            line-height: 1.1; margin-bottom: 20px; opacity: 0; 
+        }
+        .hero p { 
+            font-size: clamp(1rem, 2vw, 1.4rem); color: #888; 
+            max-width: 700px; opacity: 0; line-height: 1.6;
+        }
+
+        /* Launching Soon Badge */
+        .launch-badge {
+            margin-top: 40px; padding: 12px 30px; border-radius: 100px;
+            background: rgba(255,255,255,0.03); 
+            border: 1px solid rgba(255,255,255,0.1);
+            backdrop-filter: blur(15px);
+            opacity: 0; transform: translateY(20px);
+        }
+        .launch-badge span {
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 800; text-transform: uppercase; letter-spacing: 3px; font-size: 0.85rem;
+        }
+
+        /* Sections */
+        .section { 
+            padding: 120px 40px; min-height: 80vh; 
+            display: flex; flex-direction: column; align-items: center; 
+        }
+        .grid { 
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+            gap: 30px; width: 100%; max-width: 1200px; margin-top: 60px; 
+        }
+        .card {
+            background: #0a0a0a; padding: 50px; border-radius: 40px; 
+            border: 1px solid #1a1a1a; opacity: 0; transform: translateY(50px);
+            transition: border 0.3s ease;
+        }
+        .card:hover { border-color: #4facfe; }
+        .card h3 { font-size: 1.8rem; margin-bottom: 15px; }
+        .card p { color: #777; line-height: 1.6; }
+
+        .gradient-text {
+            background: var(--gradient);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+
+        footer { padding: 50px; text-align: center; color: #444; font-size: 0.8rem; border-top: 1px solid #111; }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+                <path d="M12 0L14.59 9.41L24 12L14.59 14.59L12 24L9.41 14.59L0 12L9.41 9.41L12 0Z" fill="url(#logo-grad)"/>
+                <defs><linearGradient id="logo-grad"><stop offset="0%" stop-color="#4facfe"/><stop offset="100%" stop-color="#da33ff"/></linearGradient></defs>
+            </svg>
+            AIRA
+        </div>
+        <div style="font-size: 0.8rem; color: #888; font-weight: 500;">2027 Edition</div>
+    </nav>
+
+    <section class="hero">
+        <canvas id="star-canvas"></canvas>
+        <h1 id="title">Intelligence <br><span class="gradient-text">Redefined.</span></h1>
+        <p id="desc">Beyond automation. Beyond limits. AIRA is the world's first truly adaptive AI ecosystem designed for your lifestyle.</p>
+        
+        <div class="launch-badge" id="badge">
+            <span>🚀 Launching Q2 2027</span>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2 style="font-size: clamp(2rem, 5vw, 3.5rem); text-align: center;">Tomorrow's Tech, <br><span class="gradient-text">Built Today.</span></h2>
+        
+        <div class="grid">
+            <div class="card">
+                <h3>Neural Core</h3>
+                <p>Proprietary silicon designed to think, learn, and adapt in real-time without cloud dependency.</p>
+            </div>
+            <div class="card">
+                <h3>Infinite Privacy</h3>
+                <p>Your data is ghosted. End-to-end local processing means what’s yours stays yours.</p>
+            </div>
+            <div class="card">
+                <h3>Pro Interface</h3>
+                <p>A zero-gravity UI that anticipates your needs before you even realize them.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        &copy; 2026 AIRA TECHNOLOGIES. ALL RIGHTS RESERVED.
+    </footer>
+
+    <script>
+        // --- GSAP ANIMATIONS ---
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Entrance
+        const tl = gsap.timeline();
+        tl.to("#title", { opacity: 1, y: 0, duration: 1.5, ease: "power4.out", delay: 0.5 })
+          .to("#desc", { opacity: 1, y: 0, duration: 1.2, ease: "power3.out" }, "-=1")
+          .to("#badge", { opacity: 1, y: 0, duration: 1, ease: "back.out(1.7)" }, "-=0.5");
+
+        // Card Scroll Reveal
+        gsap.utils.toArray(".card").forEach((card, i) => {
+            gsap.to(card, {
+                scrollTrigger: {
+                    trigger: card,
+                    start: "top 90%",
+                },
+                opacity: 1, y: 0, duration: 1, delay: i * 0.2
+            });
+        });
+
+        // --- THREE.JS 3D STAR ---
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('star-canvas'), antialias: true, alpha: true });
+        
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+        // Gemini-style Star (Octahedron)
+        const geometry = new THREE.OctahedronGeometry(2.2, 0); 
+        const material = new THREE.MeshPhongMaterial({
+            color: 0x4facfe,
+            wireframe: true,
+            transparent: true,
+            opacity: 0.4,
+            shininess: 100
+        });
+        const star = new THREE.Mesh(geometry, material);
+        scene.add(star);
+
+        // Add internal glow point
+        const coreGeom = new THREE.IcosahedronGeometry(0.8, 1);
+        const coreMat = new THREE.MeshBasicMaterial({ color: 0xda33ff, wireframe: true, transparent: true, opacity: 0.2 });
+        const core = new THREE.Mesh(coreGeom, coreMat);
+        scene.add(core);
+
+        const light = new THREE.PointLight(0xffffff, 1);
+        light.position.set(10, 10, 10);
+        scene.add(light);
+        scene.add(new THREE.AmbientLight(0xffffff, 0.4));
+
+        camera.position.z = 6;
+
+        function animate() {
+            requestAnimationFrame(animate);
+            star.rotation.y += 0.003;
+            star.rotation.x += 0.001;
+            core.rotation.y -= 0.005;
+            
+            // Interaction with scroll
+            const scrollY = window.scrollY;
+            star.rotation.z = scrollY * 0.001;
+            camera.position.y = -scrollY * 0.002;
+            
+            renderer.render(scene, camera);
+        }
+        animate();
+
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+    </script>
+</body>
+</html>
